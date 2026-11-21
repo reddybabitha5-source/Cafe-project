@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CafeHub - Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f2ee;
+            margin: 0;
+            padding: 10px;
+            color: #35251f;
+        }
+
+        header {
+            background: linear-gradient(135deg, #40251d, #80513b);
+            color: white;
+            text-align: center;
+            padding: 18px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1000px;
+            margin: 10px auto;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin-bottom: 0;
+            color: #f5dfcf;
+        }
+
+        .dashboard-title {
+            width: 90%;
+            max-width: 1000px;
+            margin: 18px auto 8px;
+            text-align: center;
+        }
+
+        .dashboard-title h2 {
+            color: #51352a;
+            margin-bottom: 5px;
+        }
+
+        .dashboard-title p {
+            color: #88766c;
+        }
+
+        /* SUMMARY CARDS */
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 90%;
+            max-width: 1000px;
+            margin: 15px auto;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 15px 8px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+            border: 1px solid #eee5de;
+        }
+
+        .summary-card h3 {
+            font-size: 14px;
+            color: #806b60;
+            margin: 0;
+        }
+
+        .summary-card p {
+            font-size: 25px;
+            font-weight: bold;
+            margin: 7px 0 0;
+            color: #503326;
+        }
+
+        /* ORDERS */
+
+        .orders-heading {
+            text-align: center;
+            color: #51352a;
+            margin: 20px 0 10px;
+        }
+
+        .refresh-btn {
+            display: block;
+            margin: 12px auto;
+            padding: 10px 22px;
+            background: #704735;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .refresh-btn:hover {
+            background: #40251d;
+        }
+
+        #orders {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            width: 98%;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .order-card {
+            background: white;
+            padding: 16px;
+            border-radius: 13px;
+            border: 1px solid #eadfd7;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            min-width: 0;
+        }
+
+        .order-card h3 {
+            color: #67412f;
+            border-bottom: 1px solid #eee5de;
+            padding-bottom: 9px;
+            margin-top: 0;
+        }
+
+        .order-card p {
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+            margin: 7px 0;
+        }
+
+        .order-card ul {
+            padding-left: 20px;
+            margin: 6px 0;
+        }
+
+        .order-card li {
+            margin: 5px 0;
+        }
+
+        .customer-details {
+            background: #fffaf5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .items-box {
+            background: #f8f4f0;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .order-total {
+            font-size: 19px;
+            font-weight: bold;
+            color: #704735;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .Pending {
+            background: #fff0c2;
+            color: #815900;
+        }
+
+        .Preparing {
+            background: #dcecff;
+            color: #24527a;
+        }
+
+        .Delivered {
+            background: #d9f2df;
+            color: #246343;
+        }
+
+        .order-card select {
+            width: 220px;
+            max-width: 100%;
+            padding: 11px;
+            margin-top: 10px;
+            border: 1px solid #b99b89;
+            border-radius: 8px;
+            background: #fffaf5;
+            font-size: 14px;
+            color: #503326;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 25px;
+            color: #88766c;
+            grid-column: 1 / -1;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+            body {
+                padding: 8px;
+            }
+
+            header,
+            .dashboard-title {
+                width: 100%;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .summary {
+                width: 100%;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #orders {
+                width: 100%;
+                grid-template-columns: 1fr;
+            }
+
+            .order-card {
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>CafeHub ☕</h1>
+        <p>Cafe Ordering & Management System</p>
+    </header>
+
+    <div class="dashboard-title">
+        <h2>Admin Dashboard</h2>
+        <p>Manage your customer orders</p>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+
+    <div class="summary">
+
+        <div class="summary-card">
+            <h3>Total Orders</h3>
+            <p id="totalOrders">0</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Pending</h3>
+            <p id="pendingOrders">0</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Preparing</h3>
+            <p id="preparingOrders">0</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Delivered</h3>
+            <p id="deliveredOrders">0</p>
+        </div>
+
+    </div>
+
+    <h2 class="orders-heading">Customer Orders</h2>
+
+   <div style="text-align:center;">
+
+    <button class="refresh-btn" onclick="loadOrders()">
+        ↻ Refresh Orders
+    </button>
+
+    <a href="/admin-logout"
+       style="display:inline-block;
+              background:#40251d;
+              color:white;
+              padding:10px 22px;
+              border-radius:8px;
+              text-decoration:none;
+              margin-bottom:15px;">
+        Logout
+    </a>
+
+</div>
+
+    <div id="orders">
+        <p class="empty-message">Loading orders...</p>
+    </div>
+
+    <script>
+
+        async function loadOrders() {
+
+            const ordersContainer = document.getElementById("orders");
+
+            try {
+
+                const response = await fetch("/admin/orders");
+
+                if (!response.ok) {
+                    throw new Error("Unable to fetch orders");
+                }
+
+                const orders = await response.json();
+
+                let pending = 0;
+                let preparing = 0;
+                let delivered = 0;
+
+                ordersContainer.innerHTML = "";
+
+                document.getElementById("totalOrders").innerText =
+                    orders.length;
+
+                if (orders.length === 0) {
+
+                    ordersContainer.innerHTML =
+                        '<p class="empty-message">No customer orders yet.</p>';
+
+                }
+
+                orders.forEach((order, index) => {
+
+                    const status = order.status || "Pending";
+
+                    if (status === "Pending") {
+                        pending++;
+                    } else if (status === "Preparing") {
+                        preparing++;
+                    } else if (status === "Delivered") {
+                        delivered++;
+                    }
+
+                    // Support both customer_name and customer
+
+                    const customerName =
+                        order.customer_name || order.customer || "Not available";
+
+                    const phone = order.phone || "Not available";
+                    const address = order.address || "Not available";
+
+                    // Group repeated items and show quantities
+
+                    let groupedItems = {};
+
+                    (order.items || []).forEach(item => {
+
+                        const itemName = item.name || "Unknown item";
+
+                        if (!groupedItems[itemName]) {
+
+                            groupedItems[itemName] = {
+                                price: Number(item.price) || 0,
+                                quantity: 0
+                            };
+
+                        }
+
+                        groupedItems[itemName].quantity++;
+
+                    });
+
+                    let itemsHTML = "";
+
+                    for (let itemName in groupedItems) {
+
+                        const item = groupedItems[itemName];
+
+                        itemsHTML += `
+                            <li>
+                                ${itemName} × ${item.quantity}
+                                - ₹${item.price * item.quantity}
+                            </li>
+                        `;
+
+                    }
+
+                    if (itemsHTML === "") {
+                        itemsHTML = "<li>No items available</li>";
+                    }
+
+                    const orderCard = document.createElement("div");
+
+                    orderCard.className = "order-card";
+
+                    orderCard.innerHTML = `
+
+                        <h3>🧾 Order ${index + 1}</h3>
+
+                        <div class="customer-details">
+
+                            <p><strong>👤 Customer:</strong>
+                                ${customerName}
+                            </p>
+
+                            <p><strong>📞 Phone:</strong>
+                                ${phone}
+                            </p>
+
+                            <p><strong>📍 Address:</strong>
+                                ${address}
+                            </p>
+
+                        </div>
+
+                        <p><strong>📅 Date:</strong>
+                            ${order.date || "Not available"}
+                        </p>
+
+                        <div class="items-box">
+
+                            <p><strong>🍔 Ordered Items:</strong></p>
+
+                            <ul>
+                                ${itemsHTML}
+                            </ul>
+
+                        </div>
+
+                        <p class="order-total">
+                            Total: ₹${order.total ?? 0}
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="status ${status}">
+                                ${status}
+                            </span>
+                        </p>
+
+                        <label><strong>Update Status:</strong></label>
+                        <br>
+
+                        <select onchange="updateStatus(${index}, this.value)">
+
+                            <option value="Pending"
+                                ${status === "Pending" ? "selected" : ""}>
+                                Pending
+                            </option>
+
+                            <option value="Preparing"
+                                ${status === "Preparing" ? "selected" : ""}>
+                                Preparing
+                            </option>
+
+                            <option value="Delivered"
+                                ${status === "Delivered" ? "selected" : ""}>
+                                Delivered
+                            </option>
+
+                        </select>
+
+                    `;
+
+                    ordersContainer.appendChild(orderCard);
+
+                });
+
+                document.getElementById("pendingOrders").innerText = pending;
+
+                document.getElementById("preparingOrders").innerText =
+                    preparing;
+
+                document.getElementById("deliveredOrders").innerText =
+                    delivered;
+
+            } catch (error) {
+
+                ordersContainer.innerHTML =
+                    '<p class="empty-message">Unable to load orders. Please refresh.</p>';
+
+                console.error("Error loading orders:", error);
+
+            }
+
+        }
+
+
+        async function updateStatus(index, status) {
+
+            try {
+
+                const response = await fetch("/update_status", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        index: index,
+                        status: status
+                    })
+
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+
+                    alert("Order status updated successfully!");
+
+                    loadOrders();
+
+                } else {
+
+                    alert(result.message || "Unable to update order status.");
+
+                }
+
+            } catch (error) {
+
+                alert("Something went wrong while updating status.");
+
+                console.error(error);
+
+            }
+
+        }
+
+        // Load orders when dashboard opens
+
+        loadOrders();
+
+    </script>
+
+</body>
+
+</html>

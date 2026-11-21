@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CafeHub - Admin Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5e9df, #e8c9b4);
+            color: #40251d;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 390px;
+            padding: 35px 28px;
+            background: white;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(64, 37, 29, 0.15);
+        }
+
+        .logo {
+            font-size: 45px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            margin: 5px 0;
+            color: #51352a;
+        }
+
+        .subtitle {
+            color: #88766c;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 15px 0 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d8c3b5;
+            border-radius: 9px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #80513b;
+            box-shadow: 0 0 0 2px rgba(128, 81, 59, 0.12);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #704735;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #40251d;
+        }
+
+        .error {
+            color: #b3261e;
+            background: #fff0ee;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 22px;
+            color: #80513b;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="logo">☕</div>
+
+        <h1>CafeHub</h1>
+
+        <p class="subtitle">Admin Login</p>
+
+        <form method="POST" action="/admin-login">
+
+            <label for="username">Username</label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter admin username"
+                required
+                autocomplete="username"
+            >
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter admin password"
+                required
+                autocomplete="current-password"
+            >
+
+            <button type="submit">Login to Dashboard</button>
+
+        </form>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <a href="/" class="back-link">← Back to CafeHub</a>
+
+    </div>
+
+</body>
+
+</html>

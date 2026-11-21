@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CafeHub - Fresh Food, Happy Moments</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=17">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="site-header">
+
+        <div class="logo">CafeHub</div>
+
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#featured">Specials</a>
+            <a href="#menu">Menu</a>
+            <a href="#cart">Your Orders</a>
+            <a href="{{ url_for('admin_login') }}">Admin</a>
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN HERO SECTION -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1 class="hero-title">CafeHub</h1>
+
+            <h2>Fresh Food,<br>Happy Moments.</h2>
+
+            <p>Made with love, served with happiness.</p>
+
+            <a href="#menu" class="hero-button">Explore Our Menu</a>
+
+        </div>
+
+        <div class="hero-image">
+            <img
+                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1000"
+                alt="Beautiful restaurant food">
+        </div>
+
+    </section>
+
+
+    <!-- FEATURED FOOD SECTION -->
+    <section class="featured-section" id="featured">
+
+        <div class="section-heading">
+            <h2>Customer Favourites</h2>
+            <p>Enjoy our popular dishes</p>
+        </div>
+
+        <div class="featured-grid">
+
+            <!-- CHEESE BURGER -->
+            <div class="featured-card">
+
+                <img
+                    src="https://www.productionparadise.com/newsletters/1954/photos/89125/web_original/heroburgers175.jpeg"
+                    alt="Cheese Burger">
+
+                <div class="featured-details">
+                    <h3>Cheese Burger</h3>
+                    <p>Juicy burger with melted cheese.</p>
+                    <span>₹110</span>
+
+                    <button type="button"
+                        onclick="addToCart('Cheese Burger', 110)">
+                        Add to Order
+                    </button>
+                </div>
+
+            </div>
+
+
+            <!-- CHEESE SANDWICH -->
+            <div class="featured-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=700"
+                    alt="Cheese Sandwich">
+
+                <div class="featured-details">
+                    <h3>Cheese Sandwich</h3>
+                    <p>Freshly grilled cheesy sandwich.</p>
+                    <span>₹120</span>
+
+                    <button type="button"
+                        onclick="addToCart('Cheese Sandwich', 110)">
+                        Add to Order
+                    </button>
+                </div>
+
+            </div>
+             
+
+            <!-- PANEER PIZZA -->
+            <div class="featured-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1579751626657-72bc17010498?w=700"
+                    alt="Paneer Pizza">
+
+                <div class="featured-details">
+                    <h3>Paneer Pizza</h3>
+                    <p>Delicious pizza with paneer toppings.</p>
+                    <span>₹220</span>
+
+                    <button type="button"
+                        onclick="addToCart('Paneer Pizza', 220)">
+                        Add to Order
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MENU HEADING -->
+    <section class="menu-intro" id="menu">
+
+        <h2>Our Menu</h2>
+
+    </section>
+
+
+    <!-- MENU ITEMS CONTINUE IN PART 2 -->
+<!-- =================================
+         COLD DRINKS
+    ================================== -->
+    <section class="category">
+
+        <h2>Cold Drinks</h2>
+
+        <div class="food-grid">
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500" alt="Cold Coffee">
+                <div class="food-details">
+                    <h3>Cold Coffee</h3>
+                    <p>₹100</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Cold Coffee',100,-1)">−</button>
+                        <span id="qty-cold-coffee">0</span>
+                        <button type="button" onclick="addToCart('Cold Coffee',100)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500" alt="Oreo Shake">
+                <div class="food-details">
+                    <h3>Oreo Shake</h3>
+                    <p>₹120</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Oreo Shake',120,-1)">−</button>
+                        <span id="qty-oreo-shake">0</span>
+                        <button type="button" onclick="addToCart('Oreo Shake',120)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1577805947697-89e18249d767?w=500" alt="Chocolate Milkshake">
+                <div class="food-details">
+                    <h3>Chocolate Milkshake</h3>
+                    <p>₹140</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Chocolate Milkshake',140,-1)">−</button>
+                        <span id="qty-chocolate-milkshake">0</span>
+                        <button type="button" onclick="addToCart('Chocolate Milkshake',140)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://sc02.alicdn.com/kf/Hcc973d52fb354204a9b42f95ec040dd4E.png" alt="Strawberry Milkshake">
+                <div class="food-details">
+                    <h3>Strawberry Milkshake</h3>
+                    <p>₹150</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Strawberry Milkshake',150,-1)">−</button>
+                        <span id="qty-strawberry-milkshake">0</span>
+                        <button type="button" onclick="addToCart('Strawberry Milkshake',150)">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =================================
+         HOT DRINKS
+    ================================== -->
+    <section class="category">
+
+        <h2>Hot Drinks</h2>
+
+        <div class="food-grid">
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500" alt="Hot Coffee">
+                <div class="food-details">
+                    <h3>Hot Coffee</h3>
+                    <p>₹30</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Hot Coffee',30,-1)">−</button>
+                        <span id="qty-hot-coffee">0</span>
+                        <button type="button" onclick="addToCart('Hot Coffee',30)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=500" alt="Tea">
+                <div class="food-details">
+                    <h3>Tea</h3>
+                    <p>₹40</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Tea',40,-1)">−</button>
+                        <span id="qty-tea">0</span>
+                        <button type="button" onclick="addToCart('Tea',40)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://kopimanyar.menu-kopi.id/img/Hot%20Chocolate.png" alt="Hot Chocolate">
+                <div class="food-details">
+                    <h3>Hot Chocolate</h3>
+                    <p>₹100</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Hot Chocolate',100,-1)">−</button>
+                        <span id="qty-hot-chocolate">0</span>
+                        <button type="button" onclick="addToCart('Hot Chocolate',100)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=500" alt="Cappuccino">
+                <div class="food-details">
+                    <h3>Cappuccino</h3>
+                    <p>₹120</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Cappuccino',120,-1)">−</button>
+                        <span id="qty-cappuccino">0</span>
+                        <button type="button" onclick="addToCart('Cappuccino',120)">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =================================
+         BURGERS
+    ================================== -->
+    <section class="category">
+
+        <h2>Burgers</h2>
+
+        <div class="food-grid">
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Veg Burger">
+                <div class="food-details">
+                    <h3>Veg Burger</h3>
+                    <p>₹100</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Veg Burger',100,-1)">−</button>
+                        <span id="qty-veg-burger">0</span>
+                        <button type="button" onclick="addToCart('Veg Burger',100)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://www.productionparadise.com/newsletters/1954/photos/89125/web_original/heroburgers175.jpeg"alt="Cheese Burger">
+                <div class="food-details">
+                    <h3>Cheese Burger</h3>
+                    <p>₹130</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Cheese Burger',130,-1)">−</button>
+                        <span id="qty-cheese-burger">0</span>
+                        <button type="button" onclick="addToCart('Cheese Burger',130)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500" alt="Crispy Chicken Burger">
+                <div class="food-details">
+                    <h3>Crispy Chicken Burger</h3>
+                    <p>₹160</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Crispy Chicken Burger',160,-1)">−</button>
+                        <span id="qty-crispy-chicken-burger">0</span>
+                        <button type="button" onclick="addToCart('Crispy Chicken Burger',160)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500" alt="Double Cheese Burger">
+                <div class="food-details">
+                    <h3>Double Cheese Burger</h3>
+                    <p>₹180</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Double Cheese Burger',180,-1)">−</button>
+                        <span id="qty-double-cheese-burger">0</span>
+                        <button type="button" onclick="addToCart('Double Cheese Burger',180)">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =================================
+         SANDWICHES
+    ================================== -->
+    <section class="category">
+
+        <h2>Sandwiches</h2>
+
+        <div class="food-grid">
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500" alt="Veg Sandwich">
+                <div class="food-details">
+                    <h3>Veg Sandwich</h3>
+                    <p>₹100</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Veg Sandwich',100,-1)">−</button>
+                        <span id="qty-veg-sandwich">0</span>
+                        <button type="button" onclick="addToCart('Veg Sandwich',100)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1539252554453-80ab65ce3586?w=500" alt="Cheese Sandwich">
+                <div class="food-details">
+                    <h3>Cheese Sandwich</h3>
+                    <p>₹120</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Cheese Sandwich',120,-1)">−</button>
+                        <span id="qty-cheese-sandwich">0</span>
+                        <button type="button" onclick="addToCart('Cheese Sandwich',120)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto/FOOD_CATALOG/IMAGES/CMS/2025/12/22/a093ff7d-d9c5-4c7b-b6e1-1fd3fba9e91b_afabc65d-c41b-43ec-9f50-1abbe6d32a3f.jpeg_compressed" alt="Grilled Paneer Sandwich">
+                <div class="food-details">
+                    <h3>Grilled Paneer Sandwich</h3>
+                    <p>₹140</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Grilled Paneer Sandwich',140,-1)">−</button>
+                        <span id="qty-grilled-paneer-sandwich">0</span>
+                        <button type="button" onclick="addToCart('Grilled Paneer Sandwich',140)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500" alt="Club Sandwich">
+                <div class="food-details">
+                    <h3>Club Sandwich</h3>
+                    <p>₹160</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Club Sandwich',160,-1)">−</button>
+                        <span id="qty-club-sandwich">0</span>
+                        <button type="button" onclick="addToCart('Club Sandwich',160)">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =================================
+         PIZZA
+    ================================== -->
+    <section class="category">
+
+        <h2>Pizza</h2>
+
+        <div class="food-grid">
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500" alt="Margherita Pizza">
+                <div class="food-details">
+                    <h3>Margherita Pizza</h3>
+                    <p>₹180</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Margherita Pizza',180,-1)">−</button>
+                        <span id="qty-margherita-pizza">0</span>
+                        <button type="button" onclick="addToCart('Margherita Pizza',180)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1579751626657-72bc17010498?w=500" alt="Paneer Pizza">
+                <div class="food-details">
+                    <h3>Paneer Pizza</h3>
+                    <p>₹220</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Paneer Pizza',220,-1)">−</button>
+                        <span id="qty-paneer-pizza">0</span>
+                        <button type="button" onclick="addToCart('Paneer Pizza',220)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500" alt="Farmhouse Pizza">
+                <div class="food-details">
+                    <h3>Farmhouse Pizza</h3>
+                    <p>₹240</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Farmhouse Pizza',240,-1)">−</button>
+                        <span id="qty-farmhouse-pizza">0</span>
+                        <button type="button" onclick="addToCart('Farmhouse Pizza',240)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500" alt="Cheese Burst Pizza">
+                <div class="food-details">
+                    <h3>Cheese Burst Pizza</h3>
+                    <p>₹260</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Cheese Burst Pizza',260,-1)">−</button>
+                        <span id="qty-cheese-burst-pizza">0</span>
+                        <button type="button" onclick="addToCart('Cheese Burst Pizza',260)">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =================================
+         PASTA
+    ================================== -->
+    <section class="category">
+
+        <h2>Pasta</h2>
+
+        <div class="food-grid">
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=500" alt="White Sauce Pasta">
+                <div class="food-details">
+                    <h3>White Sauce Pasta</h3>
+                    <p>₹160</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('White Sauce Pasta',160,-1)">−</button>
+                        <span id="qty-white-sauce-pasta">0</span>
+                        <button type="button" onclick="addToCart('White Sauce Pasta',160)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=500" alt="Red Sauce Pasta">
+                <div class="food-details">
+                    <h3>Red Sauce Pasta</h3>
+                    <p>₹180</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Red Sauce Pasta',180,-1)">−</button>
+                        <span id="qty-red-sauce-pasta">0</span>
+                        <button type="button" onclick="addToCart('Red Sauce Pasta',180)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?w=500" alt="Alfredo Mushroom Pasta">
+                <div class="food-details">
+                    <h3>Alfredo Mushroom Pasta</h3>
+                    <p>₹200</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Alfredo Mushroom Pasta',200,-1)">−</button>
+                        <span id="qty-alfredo-mushroom-pasta">0</span>
+                        <button type="button" onclick="addToCart('Alfredo Mushroom Pasta',200)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img class="food-image" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=500" alt="Arrabbiata Pasta">
+                <div class="food-details">
+                    <h3>Arrabbiata Pasta</h3>
+                    <p>₹220</p>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity('Arrabbiata Pasta',220,-1)">−</button>
+                        <span id="qty-arrabbiata-pasta">0</span>
+                        <button type="button" onclick="addToCart('Arrabbiata Pasta',220)">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+<!-- DESSERTS -->
+<section class="category">
+
+    <h2>Desserts</h2>
+
+    <div class="food-grid">
+
+        <div class="menu-item">
+            <img class="food-image"
+                 src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500"
+                 alt="Chocolate Brownie">
+            <div class="food-details">
+                <h3>Chocolate Brownie</h3>
+                <p>₹100</p>
+                <div class="quantity-controls">
+                    <button type="button" onclick="changeQuantity('Chocolate Brownie',100,-1)">−</button>
+                    <span id="qty-chocolate-brownie">0</span>
+                    <button type="button" onclick="addToCart('Chocolate Brownie',100)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img class="food-image"
+                 src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500"
+                 alt="Chocolate Cake">
+            <div class="food-details">
+                <h3>Chocolate Cake</h3>
+                <p>₹120</p>
+                <div class="quantity-controls">
+                    <button type="button" onclick="changeQuantity('Chocolate Cake',120,-1)">−</button>
+                    <span id="qty-chocolate-cake">0</span>
+                    <button type="button" onclick="addToCart('Chocolate Cake',120)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img class="food-image"
+                 src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500"
+                 alt="Chocolate Lava Cake">
+            <div class="food-details">
+                <h3>Chocolate Lava Cake</h3>
+                <p>₹140</p>
+                <div class="quantity-controls">
+                    <button type="button" onclick="changeQuantity('Chocolate Lava Cake',140,-1)">−</button>
+                    <span id="qty-chocolate-lava-cake">0</span>
+                    <button type="button" onclick="addToCart('Chocolate Lava Cake',140)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img class="food-image"
+                 src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=500"
+                 alt="Red Velvet Cake">
+            <div class="food-details">
+                <h3>Red Velvet Cake</h3>
+                <p>₹150</p>
+                <div class="quantity-controls">
+                    <button type="button" onclick="changeQuantity('Red Velvet Cake',150,-1)">−</button>
+                    <span id="qty-red-velvet-cake">0</span>
+                    <button type="button" onclick="addToCart('Red Velvet Cake',150)">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+                        <!-- =================================
+         YOUR ORDERS SECTION
+    ================================== -->
+    <section class="cart cart-section" id="cart">
+
+        <div class="cart-heading">
+            <h2>Your Orders</h2>
+            <p>Check your selected items and place your order.</p>
+        </div>
+
+        <div class="cart-content">
+
+            <div class="order-summary">
+
+                <h3>Order Summary</h3>
+
+                <p>Total Items: <strong id="count">0</strong></p>
+
+                <ul id="cartItems">
+                    <li>Your orders will appear here.</li>
+                </ul>
+
+                <h3 id="total">Total: ₹0</h3>
+
+            </div>
+
+
+            <!-- DELIVERY DETAILS -->
+            <div class="customer-details">
+
+                <h3>Delivery Details</h3>
+
+                <label for="customerName">Full Name</label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Enter your name"
+                    required
+                >
+
+                <label for="customerPhone">Mobile Number</label>
+
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    placeholder="Enter 10-digit mobile number"
+                    maxlength="10"
+                    inputmode="numeric"
+                    required
+                >
+
+                <label for="customerAddress">Delivery Address</label>
+
+                <textarea
+                    id="customerAddress"
+                    placeholder="Enter your complete address"
+                    rows="3"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- ORDER BUTTONS -->
+            <div class="cart-buttons">
+
+                <button
+                    type="button"
+                    class="place-order-btn"
+                    onclick="placeOrder()"
+                >
+                    Place Order
+                </button>
+
+                <button
+                    type="button"
+                    class="clear-cart-btn"
+                    onclick="clearCart()"
+                >
+                    Clear Orders
+                </button>
+
+            </div>
+
+            <p id="orderMessage" aria-live="polite"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+    <footer class="site-footer">
+
+        <h2>CafeHub</h2>
+
+        <p>Fresh Food, Happy Moments.</p>
+
+        <p>Made with love, served with happiness.</p>
+
+        <p class="copyright">
+            © 2026 CafeHub. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- FLOATING ORDER SUMMARY -->
+    <a href="#cart" class="floating-cart">
+
+        <span>🛒</span>
+
+        <span id="floatingCount">0</span>
+
+        <span>Items</span>
+
+        <strong id="floatingTotal">₹0</strong>
+
+    </a>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='script.js') }}?v=17"></script>
+
+</body>
+</html>
